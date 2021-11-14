@@ -1,15 +1,16 @@
-<div class="container">
+  <% unless account_signed_in? %>  
   <div class="row">
     <div class="col">
       <p class="h4">Trending</p>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-3">Trending 1</div>
-    <div class="col-sm-3">Trending 2</div>
-    <div class="col-sm-3">Trending 3</div>
-    <div class="col-sm-3">Trending 4</div>
-  </div>
+    <div class="row">
+      <div class="col-sm-3">Trending 1</div>
+      <div class="col-sm-3">Trending 2</div>
+      <div class="col-sm-3">Trending 3</div>
+      <div class="col-sm-3">Trending 4</div>
+    </div>
+  <% end %>
   <div class="row mt-4">
     <div class="col">
       <p class="h4">Popular Posts</p>
@@ -17,10 +18,7 @@
   </div>
   <div class="row">
     <div class="col-8">
-    <% @posts.each do |post| %> 
-      <%= link_to post.title, community_post_path(post.community_id, post) %>
-      <p><%= truncate post.body, lengthh: 100 %></p>
-    <% end %> 
+    <%= render "posts/lists", posts: @posts %>
     </div>
     <div class="col-4">
       <p class="h5">Up and coming Communities</p>
@@ -35,4 +33,4 @@
       <%= link_to "View All", communities_path, class: "btn btn-primary mt-3" %>
     </div>
   </div>
-</div>
+

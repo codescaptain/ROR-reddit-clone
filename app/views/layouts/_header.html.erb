@@ -1,14 +1,24 @@
 <div class="container">
-    <div class="row">
-        <div class="col-12 mt-4 border-bottom mb-4 pb-4">
+    <div class="row"> 
+        <div class="col-12 mt-4 pb-3">
             <div class="float-end">
             <% if account_signed_in? %>
-                    <%= link_to "Sign Out", destroy_account_session_path, method: :delete, class: "btn btn-outline-primary" %>        
+                    <div class="dropdown">
+                      <button class="btn btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      <%= current_account.full_name %>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><%= link_to "Profile", "", class: "dropdown-item" %></li>
+                        <li><%= link_to "Settings", edit_account_registration_path, class: "dropdown-item" %></li>
+                        <li><%= link_to "Sign Out", destroy_account_session_path, method: :delete, class: "dropdown-item" %></li>
+                      </ul>
+                    </div>
                 <% else %>
-                    <%= link_to "Log In", new_account_session_path, class: "btn btn-outline-primary" %>        
-                    <%= link_to "Sign Up", new_account_registration_path, class: "btn btn-primary" %>    
-            <% end %>       
+                    <%= link_to "Log In", new_account_session_path, class: "btn btn-outline-primary" %>
+                    <%= link_to "Sign Up", new_account_registration_path, class: "btn btn-primary" %>
+            <% end %>
             </div>
             <p class="h3"> <%= link_to "Reddit-Clone", root_path %> </p>
+      </div>
     </div>
 </div>
