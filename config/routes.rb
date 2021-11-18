@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :subscriptions
   get 'profile/index'
   get 'posts/index'
   devise_for :accounts
@@ -7,6 +8,8 @@ Rails.application.routes.draw do
   resources :communities do
     resources :posts
   end
+  resources :subscriptions 
+  resources :comments, only: [:create]
   
   root to: "public#index"
 end

@@ -3,24 +3,24 @@ class CommunitiesController < ApplicationController
     before_action :set_community, only: %i[show edit update destroy]
 
     def index
-    @communities = Community.all
+        @communities = Community.all
     end
 
     def show
-    @posts = @community.posts.all
+        @posts = @community.posts.all
+        @subscriber_count = @community.subscribers.count
+        @is_subscribed = account_signed_in? ? Subscription.where(community_id: @community.id, account_id: current_account.id).any? : false
+        @subscription = Subscription.new
     end
 
     def new
-    @community = Community.new
+        @community = Community.new
     end
 
     def create
-        @community = current_account.communities.new(community_params)
-        if @community.save
-            redirect_to communities_path
-        else
-            render :new
-        end
+        @community = current_account.communities.create(community_params)
+        @community.update!(account: current_account)
+        redirect_to communities_path
     end
 
     private
@@ -30,6 +30,6 @@ class CommunitiesController < ApplicationController
     end
 
     def community_params
-        params.require( :community ).permit(:name, :url, :rules)
+        params.require( :community ).permit(:name, :url, :summary, :rules)
     end
 end

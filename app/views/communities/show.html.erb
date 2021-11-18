@@ -1,13 +1,25 @@
-<%= link_to "Create Post", new_community_post_path(@community), class: "btn
-btn-primary" %>
 
-<h1><%= @community.name %></h1>
+<h2><%= @community.name %></h2>
+<div class="row">
+  
+  <div class="col-sm-8">
+    <%= render "posts/lists", posts: @posts %>
 
-<% @posts.each do |post| %> 
-<%= link_to post.title, community_post_path(@community, post) %>
-<p><%= truncate post.body, lengthh: 100 %></p>
-<% end %> 
+  </div>
+  <div class="col-sm-4 mt-4">
+    <div class="card p-3">
+      <% if @is_subscribed  %>
+        <p><%= link_to "Create Post", new_community_post_path(@community), class: "btn btn-primary" %></p>
+      <% else %>
+        <%= render "subscribe", community_id: @community.id %>
+      <% end %>
+      <p class="h5">About This community</p>
+      <p class="mt-2"><%= @community.summary %></p>
+      <p><%= pluralize @subscriber_count, "member" %></p>
+    </div>
+    <small>
+      <%= simple_format @community.rules %>
+    </small>
+  </div>
+</div>
 
-<small>
-    <%= simple_format @community.rules %>
-</small>

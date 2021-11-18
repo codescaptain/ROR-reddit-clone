@@ -1,11 +1,11 @@
 <div class="row">
     <div class="col-sm-8">
-
+      <%= render "posts/lists", posts: @posts %>
     </div>
     <div class="col-sm-4">
         <h4><%= @profile.full_name %></h4>
         <p><%= @profile.username %></p>
-        <p>lorem*1</p>
+        <p>lorem</p>
         <p>Cake Day: <%= @profile.created_at.strftime("%d/%m/%Y") %></p>
     </div>
 </div>
