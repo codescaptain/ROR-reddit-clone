@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
-    @comment.account_id = current_account.id
+    @comment.account_id = current_account.id 
     if @comment.save
       respond_to do |format|
         format.html { redirect_to community_post_path(@comment.post.community_id, @comment.post_id), notice: 'Comment was successfully updated.' }

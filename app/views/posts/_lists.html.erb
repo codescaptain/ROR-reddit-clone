@@ -1,7 +1,19 @@
 <% @posts.each do |post| %> 
 	<div class="card mt-4 p-4">
-		<h4 class="mb-1"><%= link_to post.title, community_post_path(post.community_id, post) %></h4>
-		<p><%= link_to post.community.name,community_path(post.community)  %> Posted By <%= link_to post.account.full_name, profile_path(post.account.username) %> <small> <%= time_ago_in_words post.created_at %></small> ago.</p>
-		<p><%= truncate post.body, lengthh: 100 %></p>
+		<div class="row">
+			<div class="col-1 text-center">
+					<div class="vote" id="vote-actions-<%= post.id %>" data-id="<%= post.id %>">
+						<div class="fa fa-arrow-up upvote <%= is_upvoted post %>"></div> <br>
+						<span class="score"><%= post.score %></span><br>
+						<div class="fa fa-arrow-down downvote <%= is_downvoted post %>"></div>
+					</div>
+			</div>
+			<div class="col-11">
+
+				<h4 class="mb-1"><%= link_to post.title, community_post_path(post.community_id, post) %></h4>
+				<p><%= link_to post.community.name,community_path(post.community)  %> Posted By <%= link_to post.account.full_name, profile_path(post.account.username) %> <small> <%= time_ago_in_words post.created_at %></small> ago.</p>
+				<p><%= truncate post.body, lengthh: 100 %></p>
+			</div>
+		</div>
 	</div>
 <% end %> 
