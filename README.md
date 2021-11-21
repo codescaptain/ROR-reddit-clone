@@ -22,3 +22,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+#Todo
+ - Add first_name, surname and username to signup form 19.11.2021
